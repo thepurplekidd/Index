@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Deal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+      </style>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+            font-family: 'Poppins', sans-serif;
+        }
+        .popup {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            font-size: 16px;
+            background-color: #e0e0e0;
+            color: black;
+            display: none;
+        }
+        /* Hover effect for all buttons */
+        button:hover {
+            background-color: #ed6d97;
+            color: white;
+        }
+        #noConfirmScreen, #finalScreen {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="popup" id="popup">
+        <div id="questionScreen">
+            <img src="peach-shy.gif">
+            <p id="questionText"></p>
+            <button id="yes" onclick="goToTerms()">Yes</button>
+            <button id="no" onclick="showNoConfirm()">No</button>
+        </div>
+        <div id="noConfirmScreen">
+            <img src="mochi-peach.gif">
+            <p id="noConfirmText"></p>
+            <button id="noConfirm" onclick="showFinalScreen()">Yes</button>
+            <button id="yesBack" onclick="backToQuestion()">No</button>
+        </div>
+        <div id="finalScreen">
+            <img src="peach-goma-peach-and-goma.gif">
+            <p id="finalText"></p>
+            <button id="stay" onclick="showMessage()">Fine, dikha</button>
+            <button id="leave" onmouseover="moveButton()">Ja na</button>
+        </div>
+    </div>
+
+    <script>
+        function typeWriterEffect(elementId, text, callback) {
+            let i = 0;
+            const speed = 20;
+            let element = document.getElementById(elementId);
+            element.innerHTML = ""; // Clear existing text
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else if (callback) {
+                    callback();
+                }
+            }
+            type();
+        }
+
+        function revealButtons(buttonIds) {
+            buttonIds.forEach(id => document.getElementById(id).style.display = 'inline-block');
+        }
+
+        window.onload = function() {
+            typeWriterEffect('questionText', 'Would you like to be my Valentine?', () => {
+                revealButtons(['yes', 'no']);
+            });
+        };
+
+        function goToTerms() {
+            window.location.href = "terms.html";
+        }
+
+        function showNoConfirm() {
+            document.getElementById('questionScreen').style.display = 'none';
+            document.getElementById('noConfirmScreen').style.display = 'block';
+            typeWriterEffect('noConfirmText', 'Are you sure?', () => {
+                revealButtons(['noConfirm', 'yesBack']);
+            });
+        }
+
+        function backToQuestion() {
+            document.getElementById('noConfirmScreen').style.display = 'none';
+            document.getElementById('questionScreen').style.display = 'block';
+            typeWriterEffect('questionText', 'Would you like to be my Valentine?', () => {
+                revealButtons(['yes', 'no']);
+            });
+        }
+
+        function showFinalScreen() {
+            document.getElementById('noConfirmScreen').style.display = 'none';
+            document.getElementById('finalScreen').style.display = 'block';
+            typeWriterEffect('finalText', 'Dekh le', () => {
+                revealButtons(['stay', 'leave']);
+            });
+        }
+
+        function moveButton() {
+            let button = document.getElementById("leave");
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 50);
+            button.style.position = "absolute";
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+        }
+
+        function showMessage() {
+    document.getElementById('finalScreen').innerHTML = `
+        <img src="orange-cat-laughing.gif">
+        <p>BBBWWWWWWAAAHAHAHAHAHAHAHAHA!!!<br>badi aayi mujhe mana karne wali!</p>`;
+    setTimeout(() => {
+        window.location.href = "terms.html";
+    }, 5000);
+}
+
+    </script>
+</body>
+</html>

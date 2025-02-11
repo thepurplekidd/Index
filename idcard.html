@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine License</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+      </style>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+            flex-direction: column;
+            font-family: 'Poppins', sans-serif;
+        }
+        .card-container {
+            width: 30vw;
+            height: calc(30vw * 638 / 1011);
+            position: relative;
+            perspective: 1000px;
+            display: none;
+            margin-bottom: 50px;
+        }
+        .card {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transform-origin: center;
+            animation: rotateCard 7s infinite linear;
+        }
+        .card img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+        }
+        .back {
+            transform: rotateY(180deg);
+        }
+        @keyframes rotateCard {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+        button {
+            padding: 10px 20px;
+            margin: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background: #e0e0e0;
+            color: black;
+            border-radius: 10px;
+        }
+        button:hover {
+            background: #ed6d97;
+            color: white;
+        }
+        .info-text {
+            display: none;
+            font-size: 12px;
+            color: #333;
+            position: absolute;
+            bottom: -12%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <button id="collectBtn">Collect Your ID Card</button>
+    <div class="card-container" id="cardContainer">
+        <div class="card">
+            <img src="front.png" alt="Front of ID Card" class="front">
+            <img src="back.png" alt="Back of ID Card" class="back">
+        </div>
+    </div>
+    <p class="info-text" id="infoText">
+        Given this card, you're now officially declared as "My Valentine!"<br>
+        <br>
+        [ Right click on either side of the card and click “save image” to download it. ]<br>
+        [ Scan the QR code given on back for the next part. ]
+        <br>
+        <br>
+        <br>
+        <button onclick="window.location.href='conveyor.html';">Proceed</button>
+    </p>
+    
+    <script>
+        document.getElementById("collectBtn").addEventListener("click", function() {
+            document.getElementById("cardContainer").style.display = "block";
+            document.getElementById("infoText").style.display = "block";
+            this.style.display = "none";
+        });
+    </script>
+</body>
+</html>
