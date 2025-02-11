@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tudum!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #f9f9f9;
+        }
+        .slideshow-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .slideshow-track {
+            display: flex;
+            animation: slide 1000s linear infinite;
+        }
+        .paused {
+            animation-play-state: paused !important;
+        }
+        .slide {
+            min-width: 100vw;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(16, 10, 10, 0.65);
+            z-index: 1;
+        }
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-400%); }
+        }
+        .text-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            z-index: 2;
+            display: none;
+        }
+        .proceed-btn {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            background: transparent;
+            border: 2px solid white;
+            border-radius: 15px;
+            padding: 15px 30px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+            z-index: 2;
+        }
+        .proceed-btn:hover {
+            background: white;
+            color: #ed6d97;
+        }
+        .password-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            z-index: 3;
+            display: none; /* Hidden initially */
+        }
+        .password-input,
+        .password-button {
+            font-size: 18px;
+            padding: 12px;
+            width: 250px;
+            border: 2px solid white;
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            border-radius: 15px;
+            display: block;
+            margin: 10px auto;
+        }
+        .password-button {
+            background: transparent;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+        .password-button:hover {
+            background: white;
+            color: #ed6d97;
+        }
+        .error-message {
+            margin-top: 8px;
+            color: white;
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="slideshow-container">
+        <div class="slideshow-track paused" id="slideshow">
+            <div class="slide" style="background-image: url('collage1.jpg');"></div>
+            <div class="slide" style="background-image: url('collage2.jpg');"></div>
+            <div class="slide" style="background-image: url('collage3.jpg');"></div>
+            <div class="slide" style="background-image: url('collage4.jpg');"></div>
+        </div>
+    </div>
+
+    <div class="password-container" id="passwordContainer">
+        <input type="password" class="password-input" id="passwordInput" placeholder="Enter Password">
+        <button class="password-button" onclick="checkPassword()">Submit</button>
+        <div class="error-message" id="errorMessage">Oops! Wrong password. Please try again.</div>
+    </div>
+
+    <div class="text-container" id="text"></div>
+    <button class="proceed-btn" id="proceed" onclick="location.href='video.html'">Proceed</button>
+
+    <script>
+        window.onload = function () {
+            // Show password input only after everything has fully loaded
+            document.getElementById("passwordContainer").style.display = "block";
+        };
+
+        const texts = [
+            "Hiiiiii babeeee!",
+            "We made it.",
+            "We made it to our second Valentine's Day together.",
+            "To put things in perspective",
+            "it takes roughly 66 days to build up a habit.",
+            "And it's been 605 days since we first started talking.",
+            "So if my boy math is right…",
+            "\"Gawd, I'm soooooooooooo OBSESSESED with this girl!\"",
+            "From the very first 'hi'",
+            "to this very moment",
+            "you made it all sooo special Muskan Sharma!",
+            "You been my comfort place",
+            "my support",
+            "my sunshine",
+            "and at any given day",
+            "the best decision I ever made.",
+            "Now even though this distance sucks",
+            "and I long for the day I get to hug you again,",
+            "Just know that",
+            "I love you...",
+            "I miss you...",
+            "...and I'm so damn lucky to have you.",
+            "To thank you for everything…",
+            "here's something special I made for you.",
+            "Now please sit back",
+            "and enjoy."
+        ];
+
+        let index = 0;
+        const textElement = document.getElementById("text");
+        const proceedBtn = document.getElementById("proceed");
+        const slideshow = document.getElementById("slideshow");
+        const passwordInput = document.getElementById("passwordInput");
+        const errorMessage = document.getElementById("errorMessage");
+
+        function checkPassword() {
+            if (passwordInput.value === "200603") {
+                document.getElementById("passwordContainer").style.display = "none";
+                slideshow.classList.remove("paused");
+                textElement.style.display = "block";
+                setTimeout(showText, 500);
+            } else {
+                errorMessage.style.display = "block";
+            }
+        }
+
+        function showText() {
+            if (index < texts.length) {
+                textElement.innerText = texts[index];
+                textElement.style.opacity = 1;
+                setTimeout(() => {
+                    textElement.style.opacity = 0;
+                    index++;
+                    setTimeout(showText, 1000);
+                }, 2000);
+            } else {
+                proceedBtn.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
